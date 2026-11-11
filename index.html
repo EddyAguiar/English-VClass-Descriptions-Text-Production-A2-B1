@@ -1,0 +1,1247 @@
+
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+<meta name="description" content="Easy Descriptions & Text Production — A2/B1 Flashcards">
+<title>Easy Descriptions & Text Production • A2/B1 Flashcards</title>
+<style>
+:root{
+  --primary:#0b3d4f;
+  --secondary:#1a7a8c;
+  --accent:#f4b942;
+  --light:#f4f7fb;
+  --dark:#17202a;
+  --muted:#667085;
+  --green:#16803c;
+  --green-bg:#eaf7ee;
+  --red:#c62828;
+  --red-bg:#fdecec;
+  --white:#fff;
+  --shadow:0 8px 24px rgba(11,61,79,.10);
+  --radius:20px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{
+  margin:0;
+  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,Helvetica,sans-serif;
+  background:var(--light);
+  color:var(--dark);
+  line-height:1.7;
+  font-size:18px;
+}
+header{
+  background:linear-gradient(135deg,var(--primary),var(--secondary));
+  color:white;
+  padding:30px 16px 38px;
+}
+.header-inner{max-width:1000px;margin:auto}
+.brand{font-weight:800;letter-spacing:.5px;font-size:1.05rem}
+header h1{font-size:clamp(1.7rem,5vw,2.8rem);line-height:1.15;margin:12px 0 8px}
+header p{margin:0;opacity:.95;font-size:1rem}
+.progress-wrap{margin-top:22px;background:rgba(255,255,255,.2);border-radius:99px;height:10px;overflow:hidden}
+.progress{width:10%;height:100%;background:var(--accent);border-radius:99px;transition:width .5s ease}
+nav{
+  position:sticky;top:0;z-index:20;
+  background:white;border-bottom:1px solid #e5e7eb;
+  overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch;
+}
+nav .nav-inner{max-width:1000px;margin:auto;display:flex}
+nav a{
+  display:inline-block;padding:13px 16px;color:var(--primary);
+  text-decoration:none;font-weight:700;font-size:.9rem;
+}
+nav a.done::after{content:" ✓";color:var(--green);font-weight:800}
+main{max-width:1000px;margin:auto;padding:20px 14px 60px}
+.card{
+  background:white;border-radius:var(--radius);padding:24px;
+  margin:20px 0;box-shadow:var(--shadow);
+}
+.card h2{color:var(--primary);margin-top:0;font-size:clamp(1.3rem,3.5vw,1.6rem)}
+.card h3{color:var(--secondary);margin-bottom:8px}
+.badge{
+  display:inline-block;background:#e8f2fb;color:var(--primary);
+  padding:5px 12px;border-radius:999px;font-size:.8rem;font-weight:800;
+}
+.goal-list{padding-left:22px}
+.goal-list li{margin:8px 0}
+.example{
+  background:#f8fafc;border-left:5px solid var(--secondary);
+  padding:14px 16px;margin:14px 0;border-radius:10px;
+}
+.example-audio{display:flex;gap:6px;margin-top:10px;flex-wrap:wrap}
+.audio-btn{
+  background:#eaf0f6;border:1px solid #d0d9e6;
+  border-radius:30px;padding:6px 14px;font-size:.8rem;
+  font-weight:700;color:var(--primary);cursor:pointer;
+  display:inline-flex;align-items:center;gap:5px;transition:.15s;
+  min-height:36px;
+}
+.audio-btn:hover{background:#d0d9e6}
+.audio-btn.playing{background:var(--secondary);color:white;border-color:var(--secondary)}
+.en{font-weight:700;color:var(--primary)}
+.pt{color:var(--muted)}
+.tip{
+  background:#fff8e7;border-left:5px solid var(--accent);
+  padding:16px;border-radius:10px;margin-top:16px;
+}
+.exercise{
+  border:1px solid #e3e8ef;border-radius:16px;padding:18px;margin:16px 0;
+}
+input[type="text"],textarea,select{
+  width:100%;padding:14px;border:1px solid #ccd5df;border-radius:12px;
+  font:inherit;background:white;font-size:1rem;
+}
+textarea{min-height:120px;resize:vertical}
+button{
+  border:0;border-radius:12px;padding:14px 20px;
+  background:var(--primary);color:white;font-weight:800;
+  cursor:pointer;font-size:1rem;min-height:48px;
+  transition:.15s;
+}
+button:hover{filter:brightness(1.08)}
+button.secondary{background:var(--secondary)}
+button.light{background:#eaf0f6;color:var(--primary)}
+button.accent{background:var(--accent);color:var(--dark)}
+.feedback{
+  margin-top:12px;padding:14px;border-radius:12px;font-weight:700;display:none;
+}
+.feedback.correct{display:block;background:var(--green-bg);color:var(--green)}
+.feedback.wrong{display:block;background:var(--red-bg);color:var(--red)}
+.option{
+  display:block;width:100%;text-align:left;margin:10px 0;
+  background:#f5f7fa;color:var(--dark);border:1px solid #dce2e9;
+  font-size:.95rem;line-height:1.5;padding:14px 16px;
+}
+.option.correct{background:var(--green-bg);border-color:#9ed7ae;color:var(--green)}
+.option.wrong{background:var(--red-bg);border-color:#efaaaa;color:var(--red)}
+.option:disabled{cursor:default;opacity:1}
+.score{
+  text-align:center;background:#eef4fa;border-radius:18px;padding:24px;
+  margin-top:20px;
+}
+.score strong{font-size:2.4rem;color:var(--primary)}
+.table-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:14px 0}
+table{width:100%;border-collapse:collapse;min-width:520px}
+th,td{padding:14px 12px;border-bottom:1px solid #e8ebef;text-align:left;font-size:.92rem}
+th{background:#eef4fa;color:var(--primary)}
+footer{
+  text-align:center;margin-top:30px;padding:30px 16px;
+  color:#777;background:white;border-top:1px solid #e5e7eb;
+}
+footer .copyright{font-weight:700}
+.small{font-size:.88rem;color:var(--muted)}
+.hidden{display:none}
+
+/* ================================================================
+   FLASHCARD GRID — large, touch-friendly
+   ================================================================ */
+.fc-grid{
+  display:grid;
+  grid-template-columns:repeat(auto-fill,minmax(320px,1fr));
+  gap:18px;
+  margin:22px 0;
+}
+@media(max-width:700px){
+  .fc-grid{grid-template-columns:1fr}
+}
+
+.fc-card{
+  background:white;
+  border-radius:20px;
+  border:2px solid #e3e8ef;
+  padding:0;
+  overflow:hidden;
+  transition:.2s;
+  position:relative;
+  display:flex;
+  flex-direction:column;
+}
+.fc-card:hover{box-shadow:0 10px 28px rgba(11,61,79,.14);border-color:#c5d5e8}
+.fc-card.completed{border-color:var(--green);background:#f6fdf8}
+
+.fc-header{
+  padding:18px 18px 12px;
+  display:flex;
+  align-items:center;
+  gap:10px;
+  cursor:pointer;
+  user-select:none;
+  -webkit-tap-highlight-color:transparent;
+}
+.fc-header .fc-icon{font-size:1.8rem;flex-shrink:0;line-height:1}
+.fc-header .fc-title-wrap{flex:1}
+.fc-header .fc-topic{
+  font-size:.72rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.6px;color:var(--muted);margin-bottom:2px;
+}
+.fc-header .fc-question{
+  font-size:1.05rem;font-weight:700;color:var(--primary);
+  line-height:1.35;
+}
+.fc-header .fc-toggle{
+  font-size:1.4rem;color:var(--secondary);
+  transition:transform .25s;flex-shrink:0;
+}
+.fc-card.open .fc-toggle{transform:rotate(180deg)}
+
+.fc-level{
+  display:inline-block;font-size:.68rem;font-weight:800;
+  padding:3px 10px;border-radius:999px;margin:0 18px 10px;
+  letter-spacing:.3px;
+}
+.lvl-a2{background:#e3f2fd;color:#0d47a1}
+.lvl-b1{background:#e8f5e9;color:#1b5e20}
+
+.fc-body{
+  max-height:0;
+  overflow:hidden;
+  transition:max-height .4s ease;
+  padding:0 18px;
+}
+.fc-card.open .fc-body{
+  max-height:2000px;
+  padding:0 18px 18px;
+}
+
+.fc-step{
+  background:#f8fafc;
+  border-radius:12px;
+  padding:14px 16px;
+  margin:10px 0;
+  border-left:4px solid var(--secondary);
+  animation:fadeIn .35s ease;
+}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+
+.fc-step .step-label{
+  font-size:.7rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.6px;margin-bottom:6px;
+  display:flex;align-items:center;gap:5px;
+}
+.fc-step.answer{border-left-color:var(--green);background:#f0faf4}
+.fc-step.answer .step-label{color:var(--green)}
+.fc-step.explanation{border-left-color:var(--accent);background:#fffbf0}
+.fc-step.explanation .step-label{color:#b07d10}
+.fc-step.examples{border-left-color:var(--secondary);background:#f4f9fc}
+.fc-step.examples .step-label{color:var(--secondary)}
+.fc-step .step-text{font-size:.95rem;line-height:1.7}
+.fc-step .step-text strong{color:var(--primary)}
+
+.fc-step .audio-line{
+  display:flex;gap:6px;margin-top:10px;flex-wrap:wrap;
+}
+
+.fc-progress{
+  display:flex;gap:6px;
+  padding:0 18px 14px;
+  align-items:center;
+}
+.fc-progress .dot{
+  width:10px;height:10px;border-radius:50%;
+  background:#d0d9e6;transition:.25s;
+}
+.fc-progress .dot.done{background:var(--green)}
+.fc-progress .dot.active{background:var(--secondary);box-shadow:0 0 0 3px rgba(26,122,140,.2)}
+.fc-progress .fc-count{
+  margin-left:auto;font-size:.75rem;color:var(--muted);font-weight:700;
+}
+
+.fc-actions{
+  display:flex;gap:8px;padding:0 18px 16px;flex-wrap:wrap;
+}
+.fc-actions button{
+  flex:1;min-width:120px;font-size:.85rem;padding:10px 14px;min-height:42px;
+}
+
+/* Filter bar */
+.filter-bar{
+  display:flex;gap:10px;flex-wrap:wrap;align-items:center;
+  margin:16px 0 8px;
+}
+.filter-bar label{font-weight:700;font-size:.85rem;color:var(--primary)}
+.filter-bar select{
+  width:auto;min-width:150px;padding:10px 14px;font-size:.88rem;
+  border-radius:10px;
+}
+.filter-bar .count{
+  font-size:.82rem;color:var(--muted);margin-left:auto;font-weight:700;
+}
+
+/* Tab bar */
+.tab-bar{
+  display:flex;gap:0;margin:18px 0 0;
+  border-bottom:2px solid #e3e8ef;
+  flex-wrap:wrap;
+}
+.tab-bar button{
+  background:none;color:var(--muted);border:0;border-radius:0;
+  padding:12px 18px;font-weight:700;font-size:.9rem;
+  border-bottom:3px solid transparent;margin-bottom:-2px;
+  cursor:pointer;width:auto;min-height:auto;
+}
+.tab-bar button.active{color:var(--primary);border-bottom-color:var(--primary)}
+.tab-bar button:hover{color:var(--primary)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* STAR grid */
+.star-grid{
+  display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));
+  gap:12px;margin:16px 0;
+}
+.star-box{
+  background:#f8fafc;border-radius:14px;padding:16px;
+  border:1px solid #e3e8ef;
+}
+.star-box strong{color:var(--secondary);display:block;margin-bottom:6px;font-size:.9rem}
+.star-box p{margin:0;font-size:.9rem}
+
+/* Vocab highlight */
+.vocab-word{
+  display:inline-block;background:#e8f2fb;color:var(--primary);
+  padding:2px 8px;border-radius:6px;font-weight:700;font-size:.88rem;
+  margin:2px 2px;cursor:pointer;transition:.15s;
+}
+.vocab-word:hover{background:#d0e2f5}
+
+/* Reset all */
+.reset-all{
+  margin-left:auto;font-size:.82rem;padding:10px 16px;
+  border-radius:12px;background:#eaf0f6;color:var(--primary);
+  width:auto;min-height:42px;
+}
+
+/* Pronunciation guide */
+.pron-guide{
+  background:#f0f7fa;border-radius:10px;padding:10px 14px;margin-top:10px;
+  font-size:.88rem;color:var(--secondary);
+}
+.pron-guide strong{color:var(--primary)}
+
+/* Simple phrase box */
+.simple-phrase{
+  background:#e8f2fb;border-radius:10px;padding:12px 16px;margin:10px 0;
+  border-left:4px solid var(--primary);
+}
+.simple-phrase .label{
+  font-size:.7rem;font-weight:800;text-transform:uppercase;
+  letter-spacing:.5px;color:var(--primary);margin-bottom:4px;
+}
+.simple-phrase .text{font-size:1rem;font-weight:700;color:var(--dark)}
+
+/* Responsive */
+@media(max-width:600px){
+  body{font-size:17px}
+  header{padding-top:24px}
+  .card{padding:18px;margin:16px 0}
+  nav a{padding:12px 14px;font-size:.84rem}
+  button{width:100%;margin-top:6px}
+  .audio-btn{width:auto;margin-top:0}
+  .filter-bar select{width:100%}
+  .filter-bar .count{margin-left:0;width:100%}
+  .fc-header{padding:16px 16px 10px}
+  .fc-header .fc-question{font-size:1rem}
+  .fc-body{padding:0 16px}
+  .fc-card.open .fc-body{padding:0 16px 16px}
+  .fc-progress{padding:0 16px 12px}
+  .fc-actions{padding:0 16px 14px}
+  .tab-bar button{padding:10px 12px;font-size:.82rem}
+}
+@media(min-width:601px) and (max-width:900px){
+  .fc-grid{grid-template-columns:repeat(auto-fill,minmax(300px,1fr))}
+}
+</style>
+</head>
+
+<body>
+
+<header>
+  <div class="header-inner">
+    <div class="brand">Easy English Coach • Edson D'Aguiar</div>
+    <h1>📝 Descriptions & Text Production — A2/B1</h1>
+    <p>Simple English · Clear Explanations · Examples · Learn to Describe Things</p>
+    <div class="progress-wrap" aria-label="Progresso"><div class="progress" id="globalProgress"></div></div>
+    <p class="small" style="color:white;margin-top:8px"><span id="progressLabel">0</span>% concluído • Descriptions & Writing • Easy Level</p>
+  </div>
+</header>
+
+<nav aria-label="Navegação">
+  <div class="nav-inner">
+    <a href="#objetivos" data-section="objetivos">Objetivos</a>
+    <a href="#flashcards" data-section="flashcards">Flashcards</a>
+    <a href="#vocabulary" data-section="vocabulary">Vocabulary</a>
+    <a href="#practice" data-section="practice">Practice</a>
+    <a href="#quiz" data-section="quiz">Quiz</a>
+  </div>
+</nav>
+
+<main>
+
+<!-- ========== OBJETIVOS ========== -->
+<section class="card" id="objetivos">
+  <span class="badge">A2–B1 • EASY ENGLISH</span>
+  <h2>🎯 Objetivos da aula</h2>
+  <p>Esta aula usa <strong>inglês simples e claro</strong> para ajudar você a <strong>descrever coisas em inglês</strong>. Cada resposta vem com uma <strong>explicação fácil</strong> e <strong>exemplos</strong> para você entender melhor.</p>
+  <ul class="goal-list">
+    <li>Descrever <strong>lugares</strong> (praia, escola, parque, quarto) com adjetivos simples.</li>
+    <li>Descrever <strong>pessoas</strong> (amigos, família) com palavras de aparência e personalidade.</li>
+    <li>Descrever <strong>sentimentos</strong> e <strong>tempo</strong> (clima) com frases curtas.</li>
+    <li>Aprender a escrever <strong>textos informativos</strong> e <strong>argumentativos</strong> simples.</li>
+    <li>Praticar <strong>e-mails</strong> e <strong>descrições</strong> com estrutura clara.</li>
+    <li>Usar <strong>áudio US/UK</strong> para melhorar pronúncia e fala.</li>
+  </ul>
+
+  <div class="tip">
+    <strong>💡 Dica:</strong> Use frases curtas e palavras simples. O importante é comunicar sua ideia. Clique nos cartões para ver a resposta, a explicação e os exemplos.
+  </div>
+</section>
+
+<!-- ========== FLASHCARDS ========== -->
+<section class="card" id="flashcards">
+  <h2>🃏 Flashcards — Easy Descriptions</h2>
+  <p>Clique em um cartão para ver a <strong>resposta</strong>, depois a <strong>explicação fácil</strong> e os <strong>exemplos</strong>. Use os botões de áudio para ouvir a pronúncia. Seu progresso é salvo automaticamente.</p>
+
+  <div class="tab-bar" id="tabBar">
+    <button class="active" data-tab="all" onclick="switchTab('all')">📋 Todos</button>
+    <button data-tab="places" onclick="switchTab('places')">🏖️ Places</button>
+    <button data-tab="people" onclick="switchTab('people')">👤 People</button>
+    <button data-tab="feelings" onclick="switchTab('feelings')">😊 Feelings & Weather</button>
+    <button data-tab="texts" onclick="switchTab('texts')">📝 Text Production</button>
+  </div>
+
+  <div class="filter-bar">
+    <label for="levelFilter">Nível:</label>
+    <select id="levelFilter" onchange="renderFlashcards()">
+      <option value="all">Todos</option>
+      <option value="A2">A2</option>
+      <option value="B1">B1</option>
+    </select>
+    <span class="count" id="fcCount"></span>
+    <button class="reset-all" onclick="resetAllCards()">🔄 Reset all</button>
+  </div>
+
+  <div class="tip" style="margin-top:12px">
+    <strong>💡 Dica:</strong> Use adjetivos simples: <em>big, small, happy, sad, hot, cold, beautiful, quiet</em>. Use o verbo <em>"to be"</em> (is, are) e <em>"have/has"</em> para descrever.
+  </div>
+
+  <div class="fc-grid" id="flashcardGrid"></div>
+</section>
+
+<!-- ========== VOCABULARY ========== -->
+<section class="card" id="vocabulary">
+  <h2>📚 Vocabulary — Easy Description Words</h2>
+  <p>Aprenda palavras essenciais para descrever coisas em inglês. Clique nos botões de áudio para ouvir a pronúncia.</p>
+
+  <div class="table-wrap">
+    <table>
+      <thead><tr><th>Word</th><th>Simple Meaning</th><th>Easy Example</th><th>Audio</th></tr></thead>
+      <tbody>
+        <tr>
+          <td><strong>Big / Small</strong></td>
+          <td>Grande / Pequeno</td>
+          <td>The school is big. My room is small.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="The school is big. My room is small." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="The school is big. My room is small." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Happy / Sad</strong></td>
+          <td>Feliz / Triste</td>
+          <td>She is happy. He is sad.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="She is happy. He is sad." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="She is happy. He is sad." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Hot / Cold</strong></td>
+          <td>Quente / Frio</td>
+          <td>The pizza is hot. The water is cold.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="The pizza is hot. The water is cold." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="The pizza is hot. The water is cold." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Beautiful</strong></td>
+          <td>Bonito / Linda</td>
+          <td>The beach is beautiful.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="The beach is beautiful." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="The beach is beautiful." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Quiet / Noisy</strong></td>
+          <td>Silencioso / Barulhento</td>
+          <td>The library is quiet. The street is noisy.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="The library is quiet. The street is noisy." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="The library is quiet. The street is noisy." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Friendly</strong></td>
+          <td>Simpático / Amigável</td>
+          <td>My teacher is friendly.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="My teacher is friendly." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="My teacher is friendly." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Cozy</strong></td>
+          <td>Aconchegante</td>
+          <td>My room is small but cozy.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="My room is small but cozy." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="My room is small but cozy." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Delicious / Tasty</strong></td>
+          <td>Delicioso / Saboroso</td>
+          <td>The pizza is delicious.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="The pizza is delicious." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="The pizza is delicious." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Tall / Short</strong></td>
+          <td>Alto / Baixo</td>
+          <td>My friend is tall. His brother is short.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="My friend is tall. His brother is short." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="My friend is tall. His brother is short." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+        <tr>
+          <td><strong>Relaxed</strong></td>
+          <td>Relaxado / Tranquilo</td>
+          <td>I feel relaxed on the weekend.</td>
+          <td><div class="example-audio"><button class="audio-btn" data-phrase="I feel relaxed on the weekend." data-accent="us">🇺🇸</button><button class="audio-btn" data-phrase="I feel relaxed on the weekend." data-accent="uk">🇬🇧</button></div></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="tip">
+    <strong>💡 Dica:</strong> Use <em>"It is..."</em> para coisas e lugares. Use <em>"He is..." / "She is..."</em> para pessoas. Use <em>"I feel..."</em> para sentimentos.
+  </div>
+</section>
+
+<!-- ========== PRACTICE ========== -->
+<section class="card" id="practice">
+  <h2>🗣️ Practice — Describe Things in English</h2>
+  <p>Choose a topic and practice your description out loud. Use simple words and short sentences.</p>
+
+  <div class="exercise">
+    <h3>🎯 Choose a topic</h3>
+    <select id="practiceTopic">
+      <option value="beach">Describe a beach</option>
+      <option value="bedroom">Describe your bedroom</option>
+      <option value="person">Describe a happy person</option>
+      <option value="rainy">Describe a rainy day</option>
+      <option value="school">Describe a school</option>
+      <option value="friend">Describe your best friend</option>
+      <option value="food">Describe your favorite food</option>
+      <option value="feel">Describe how you feel today</option>
+    </select>
+    <button class="secondary" onclick="showPractice()" style="margin-top:10px">🔍 Show Question & Model</button>
+
+    <div id="practiceOutput" class="exercise" style="display:none;background:#f8fafc;">
+      <h4 id="practiceQuestion" style="color:var(--primary);margin-top:0"></h4>
+      <div id="practiceModel"></div>
+      <div id="practiceAudio" class="example-audio" style="margin-top:8px"></div>
+    </div>
+  </div>
+
+  <h3 style="margin-top:24px">🎤 Your Turn — Speak for 30–45 seconds</h3>
+  <ol>
+    <li>Describe your favorite place. Use colors and simple adjectives.</li>
+    <li>Describe a person you like. Say how they look and how they are.</li>
+    <li>Describe the weather today. Use words like hot, cold, sunny, rainy.</li>
+    <li>Describe your favorite food. Say how it tastes and how it smells.</li>
+  </ol>
+
+  <textarea id="speakingNotes" placeholder="Write your answers here before speaking..."></textarea>
+  <button onclick="saveSpeaking()">💾 Save My Practice</button>
+  <div id="speakFb" class="feedback"></div>
+</section>
+
+<!-- ========== QUIZ ========== -->
+<section class="card" id="quiz">
+  <h2>🎮 Easy Quiz</h2>
+  <p>10 questions about descriptions. Choose the best answer. Feedback appears immediately. <em>Questions are shuffled.</em></p>
+
+  <div id="quizContainer"></div>
+
+  <div class="score">
+    <div>YOUR SCORE</div>
+    <strong id="score">0 / 10</strong>
+    <p id="scoreMessage">Complete the quiz to see your result.</p>
+    <button class="light" onclick="restartQuiz()">🔄 Restart Quiz</button>
+  </div>
+</section>
+
+<!-- ========== CHALLENGE ========== -->
+<section class="card">
+  <h2>🏁 Challenge — Your turn!</h2>
+  <p>Without looking at the content, describe in English:</p>
+  <div class="example">
+    <strong>1. A beach:</strong> "The sand is soft. The sea is blue. It is sunny."<br><br>
+    <strong>2. Your bedroom:</strong> "My room is small. It has a bed and a desk."<br><br>
+    <strong>3. A happy person:</strong> "She is smiling. She is laughing a lot."<br><br>
+    <strong>4. A rainy day:</strong> "The sky is gray. It is raining. People use umbrellas."
+  </div>
+  <p class="small">Goal: describe things clearly using simple words and short sentences.</p>
+</section>
+
+</main>
+
+<footer>
+  Easy English Coach • Descriptions & Writing • A2–B1<br>
+  <span class="copyright">© English VClass • Edson D'Aguiar</span>
+  • WhatsApp ➡️ <a href="https://wa.me/5541991725009" target="_blank" rel="noopener">Contact</a>
+</footer>
+
+<script>
+/* ================================================================
+   AUDIO — global click handler
+   ================================================================ */
+document.addEventListener('click', function(e) {
+  const btn = e.target.closest('.audio-btn');
+  if (!btn) return;
+  e.stopPropagation();
+  const phrase = btn.dataset.phrase;
+  const accent = btn.dataset.accent || 'us';
+  if (!phrase) return;
+
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+
+  const utterance = new SpeechSynthesisUtterance(phrase);
+  utterance.lang = accent === 'uk' ? 'en-GB' : 'en-US';
+  utterance.rate = 0.8;
+  utterance.pitch = 1.0;
+
+  const voices = window.speechSynthesis.getVoices();
+  if (voices.length > 0) {
+    const found = voices.find(v => v.lang.startsWith(accent === 'uk' ? 'en-GB' : 'en-US'));
+    if (found) utterance.voice = found;
+  }
+
+  btn.classList.add('playing');
+  utterance.onend = () => btn.classList.remove('playing');
+  utterance.onerror = () => btn.classList.remove('playing');
+  window.speechSynthesis.speak(utterance);
+});
+
+/* ================================================================
+   FEEDBACK HELPER
+   ================================================================ */
+function setFeedback(id, correct, text){
+  const el=document.getElementById(id);
+  el.className='feedback '+(correct?'correct':'wrong');
+  el.textContent=(correct?'🟢 ':'🔴 ')+text;
+}
+
+/* ================================================================
+   PROGRESS TRACKING
+   ================================================================ */
+const SECTIONS = ['objetivos','flashcards','vocabulary','practice','quiz'];
+const sectionState = {};
+SECTIONS.forEach(s => sectionState[s] = false);
+
+function markSectionDone(id){
+  if (sectionState[id]) return;
+  sectionState[id] = true;
+  const link = document.querySelector('nav a[data-section="'+id+'"]');
+  if (link) link.classList.add('done');
+  updateProgress();
+}
+
+function updateProgress(){
+  const done = SECTIONS.filter(s => sectionState[s]).length;
+  const pct = Math.round((done / SECTIONS.length) * 100);
+  document.getElementById('globalProgress').style.width = pct + '%';
+  document.getElementById('progressLabel').textContent = pct;
+}
+
+document.querySelectorAll('#practice button').forEach(btn => {
+  btn.addEventListener('click', () => markSectionDone('practice'));
+});
+
+/* ================================================================
+   FLASHCARD DATA — SIMPLE ENGLISH A2/B1 — DESCRIPTIONS
+   Each card: { id, category, level, icon, topic, question, answer, explanation, examples[], audio }
+   ================================================================ */
+const FLASHCARDS = [
+  /* ---------- PLACES ---------- */
+  {
+    id:'p-beach', category:'places', level:'A2', icon:'🏖️', topic:'Describe a beach',
+    question: 'Describe a beach.',
+    answer: "The sand is soft. The sea is blue. It is sunny. The beach is quiet and warm.",
+    explanation: 'Use colors and simple adjectives. Say what you see: sand, sea, sky. Use "is" for description.',
+    examples: [
+      "The beach is beautiful. It has white sand and blue water.",
+      "The beach is quiet. I like to walk there.",
+      "The sea is cold, but the sun is hot."
+    ],
+    audio: "The sand is soft. The sea is blue. It is sunny. The beach is quiet and warm."
+  },
+  {
+    id:'p-bedroom', category:'places', level:'A2', icon:'🛏️', topic:'Describe your bedroom',
+    question: 'Describe your bedroom.',
+    answer: "My room is small but cozy. It has a bed and a desk. The bed is next to the window. I have a red chair. There is a lamp on the desk.",
+    explanation: 'Use easy nouns and describe size. Use "has" for things in the room. Use "next to" for position.',
+    examples: [
+      "My room is big. It has a blue bed and a big window.",
+      "My room is small. I have a computer and many books.",
+      "There is a picture on the wall. The picture is of my family."
+    ],
+    audio: "My room is small but cozy. It has a bed and a desk. The bed is next to the window. I have a red chair. There is a lamp on the desk."
+  },
+  {
+    id:'p-school', category:'places', level:'A2', icon:'🏫', topic:'Describe a school',
+    question: 'Describe a school.',
+    answer: "The school is big. It has many classrooms. There are many students in the hall. The library is quiet. The playground is noisy.",
+    explanation: 'Use place words and quantity words. Use "There are" for many things. Use "is" for one thing.',
+    examples: [
+      "My school is old but beautiful. It has a big garden.",
+      "The school has a computer room. We study English there.",
+      "There are 30 students in my class. The teacher is very friendly."
+    ],
+    audio: "The school is big. It has many classrooms. There are many students in the hall. The library is quiet. The playground is noisy."
+  },
+  {
+    id:'p-park', category:'places', level:'A2', icon:'🌳', topic:'Describe a park',
+    question: 'Describe a park you like.',
+    answer: "I like the park near my house. It has trees, flowers, and a small lake. It is beautiful. People walk and play there. I feel relaxed in the park.",
+    explanation: 'Talk about what you see in the place. Use "has" and simple adjectives. Say how you feel there.',
+    examples: [
+      "The park is green and quiet. I go there every Sunday.",
+      "There are many birds in the park. They sing in the morning.",
+      "The park has a playground for children. My sister loves it."
+    ],
+    audio: "I like the park near my house. It has trees, flowers, and a small lake. It is beautiful. People walk and play there. I feel relaxed in the park."
+  },
+
+  /* ---------- PEOPLE ---------- */
+  {
+    id:'pe-happy', category:'people', level:'A2', icon:'😊', topic:'Describe a happy person',
+    question: 'Describe a happy person.',
+    answer: "She is smiling. She is laughing a lot. She is happy because she got good news. She has a big smile on her face.",
+    explanation: 'Use verbs like "smile" and "laugh". Use "because" to say the reason. Use "has" for appearance.',
+    examples: [
+      "He is happy. He is smiling and dancing.",
+      "She is very happy today. She got a new job.",
+      "The children are happy. They are playing in the garden."
+    ],
+    audio: "She is smiling. She is laughing a lot. She is happy because she got good news. She has a big smile on her face."
+  },
+  {
+    id:'pe-friend', category:'people', level:'A2', icon:'👫', topic:'Describe your best friend',
+    question: 'Describe your best friend.',
+    answer: "My best friend is Julia. She is tall and has long brown hair. She is always happy and friendly. She helps me a lot. She likes to laugh.",
+    explanation: 'Describe personality and looks. Use "is" for appearance and personality. Use "has" for hair, eyes, etc.',
+    examples: [
+      "He is short and wears glasses. He likes to laugh a lot.",
+      "She has brown hair and a big smile. She is very kind.",
+      "My friend is funny. He always makes me laugh."
+    ],
+    audio: "My best friend is Julia. She is tall and has long brown hair. She is always happy and friendly. She helps me a lot. She likes to laugh."
+  },
+  {
+    id:'pe-person', category:'people', level:'B1', icon:'🧑', topic:'Describe a person you know',
+    question: 'Describe a person you know.',
+    answer: "My friend Julia is tall and has long brown hair. She is always happy and friendly. She works in a hospital. She helps people every day. I like her because she is kind.",
+    explanation: 'Use short sentences and common adjectives like "tall", "happy", "friendly". Say what the person does and why you like them.',
+    examples: [
+      "My father is tall and strong. He works in an office. He is very calm.",
+      "My teacher is friendly. She has short black hair and wears glasses.",
+      "My brother is young and funny. He plays the guitar very well."
+    ],
+    audio: "My friend Julia is tall and has long brown hair. She is always happy and friendly. She works in a hospital. She helps people every day. I like her because she is kind."
+  },
+  {
+    id:'pe-animal', category:'people', level:'A2', icon:'🐶', topic:'Describe an animal',
+    question: 'Describe an animal.',
+    answer: "The dog is big and white. It runs a lot and likes to play. My cat is black. It sleeps on the sofa. It is very lazy.",
+    explanation: 'Use simple sentences for appearance and behavior. Say what the animal does. Use "it" for animals.',
+    examples: [
+      "My dog is small and brown. It barks at night.",
+      "The cat is white and soft. It likes to sleep all day.",
+      "The bird is blue. It sings in the morning."
+    ],
+    audio: "The dog is big and white. It runs a lot and likes to play. My cat is black. It sleeps on the sofa. It is very lazy."
+  },
+
+  /* ---------- FEELINGS & WEATHER ---------- */
+  {
+    id:'f-rainy', category:'feelings', level:'A2', icon:'🌧️', topic:'Describe a rainy day',
+    question: 'Describe a rainy day.',
+    answer: "The sky is gray. It is raining. People use umbrellas. The streets are wet. I stay at home and drink tea. It is a quiet day.",
+    explanation: 'Use weather words: sky, rain, wet. Use "is" for description. Say what people do.',
+    examples: [
+      "It is cold and rainy. I wear a jacket.",
+      "The rain is heavy. The streets are full of water.",
+      "I like rainy days. I read books and listen to music."
+    ],
+    audio: "The sky is gray. It is raining. People use umbrellas. The streets are wet. I stay at home and drink tea. It is a quiet day."
+  },
+  {
+    id:'f-food', category:'feelings', level:'A2', icon:'🍕', topic:'Describe your favorite food',
+    question: 'Describe your favorite food.',
+    answer: "I love pizza. It is hot and tasty. My pizza has cheese and tomato. It smells good. I eat pizza with my family on Fridays.",
+    explanation: 'Talk about taste and temperature. Use "tasty", "hot", "delicious". Say when you eat it.',
+    examples: [
+      "I love pasta. It is warm and delicious. My mother makes it on Sundays.",
+      "My favorite food is rice and beans. It is healthy and tasty.",
+      "I like fruit. Apples are sweet and oranges are juicy."
+    ],
+    audio: "I love pizza. It is hot and tasty. My pizza has cheese and tomato. It smells good. I eat pizza with my family on Fridays."
+  },
+  {
+    id:'f-feel', category:'feelings', level:'A2', icon:'😌', topic:'Describe how you feel today',
+    question: 'How do you feel today?',
+    answer: "I feel good today. I am happy and relaxed. I slept well. I am not tired. I feel ready for the day.",
+    explanation: 'Use feeling adjectives: happy, relaxed, tired, good, bad. Use "I feel..." or "I am...".',
+    examples: [
+      "I feel tired after school. I want to sleep.",
+      "I am happy today because it is my birthday.",
+      "I feel a little sad. I miss my family."
+    ],
+    audio: "I feel good today. I am happy and relaxed. I slept well. I am not tired. I feel ready for the day."
+  },
+
+  /* ---------- TEXT PRODUCTION ---------- */
+  {
+    id:'t-informative', category:'texts', level:'B1', icon:'📄', topic:'Informative Text',
+    question: 'Write a small informative text about recycling.',
+    answer: "Recycling is important. It helps save natural resources. It reduces pollution. It also reduces waste in landfills. We should recycle paper, plastic, and glass every day.",
+    explanation: 'An informative text gives facts. Use clear sentences. Use "because" to explain why. Keep it short and objective.',
+    examples: [
+      "Climate change affects weather around the world. Temperatures are rising. This causes more storms and droughts.",
+      "Recycling saves energy. It also helps the environment.",
+      "Many people recycle at home. Schools and offices recycle too."
+    ],
+    audio: "Recycling is important. It helps save natural resources. It reduces pollution. It also reduces waste in landfills. We should recycle paper, plastic, and glass every day."
+  },
+  {
+    id:'t-argumentative', category:'texts', level:'B1', icon:'🗣️', topic:'Argumentative Text',
+    question: 'Write a short argumentative text about renewable energy.',
+    answer: "Renewable energy is good for the world. It is clean and safe. It reduces pollution. We should use solar and wind power. This helps our planet and our future.",
+    explanation: 'An argumentative text gives your opinion. Use "should" to make a recommendation. Use strong reasons. Say what you think is best.',
+    examples: [
+      "School uniforms should be mandatory. They promote equality and reduce peer pressure.",
+      "Renewable sources like solar and wind power are abundant. They emit little pollution.",
+      "We should protect the environment because it affects our health."
+    ],
+    audio: "Renewable energy is good for the world. It is clean and safe. It reduces pollution. We should use solar and wind power. This helps our planet and our future."
+  },
+  {
+    id:'t-email', category:'texts', level:'B1', icon:'📧', topic:'Email Writing',
+    question: 'Write an email asking for information about an English course.',
+    answer: "Subject: Inquiry About English Course\n\nDear Sir or Madam,\n\nI am interested in your English course. Could you please give me more information about the schedule and the price? I would also like to know about certification.\n\nThank you for your attention.\n\nBest regards,\nJohn",
+    explanation: 'Use a clear subject. Start with "Dear Sir or Madam". Ask clear questions. End with "Best regards" and your name. Keep it short and polite.',
+    examples: [
+      "Could you please provide more details about the course?",
+      "I am particularly interested in evening classes.",
+      "I look forward to your reply."
+    ],
+    audio: "Subject: Inquiry About English Course. Dear Sir or Madam, I am interested in your English course. Could you please give me more information about the schedule and the price? I would also like to know about certification. Thank you for your attention. Best regards, John."
+  },
+  {
+    id:'t-news', category:'texts', level:'B1', icon:'📰', topic:'News Writing',
+    question: 'Write a short news text about a new park.',
+    answer: "A new park, Green Valley Park, opened yesterday. The event had music and food. People planted trees. Local families said it is a wonderful place. The park has a playground and a lake.",
+    explanation: 'Use the past simple for news. Start with the main event. Add details: what happened, who was there, what people said.',
+    examples: [
+      "A powerful storm hit the coast last night. It caused floods and power outages.",
+      "The city opened a new community center yesterday. It has sports facilities and classrooms.",
+      "Hundreds of people enjoyed the festival. The mayor attended the ceremony."
+    ],
+    audio: "A new park, Green Valley Park, opened yesterday. The event had music and food. People planted trees. Local families said it is a wonderful place. The park has a playground and a lake."
+  },
+  {
+    id:'t-description', category:'texts', level:'B1', icon:'🖼️', topic:'Description Writing',
+    question: 'Write a short description of a museum.',
+    answer: "The museum is a peaceful place. It has many old things. Each room tells a different story. There are artifacts from ancient Egypt. Visitors feel like they are traveling through time. The museum is quiet and beautiful.",
+    explanation: 'Use adjectives and "has" to describe. Talk about what you see and how it feels. Use present simple for descriptions.',
+    examples: [
+      "The park is a peaceful place filled with colorful flowers and tall trees.",
+      "The library is quiet and full of books. Students come here to study.",
+      "The beach is beautiful. It has white sand and blue water."
+    ],
+    audio: "The museum is a peaceful place. It has many old things. Each room tells a different story. There are artifacts from ancient Egypt. Visitors feel like they are traveling through time. The museum is quiet and beautiful."
+  }
+];
+
+/* ================================================================
+   FLASHCARD RENDERING
+   ================================================================ */
+let currentTab = 'all';
+const cardState = {}; // id -> { step: 0..3, open: bool }
+
+FLASHCARDS.forEach(c => { cardState[c.id] = { step: 0, open: false }; });
+
+// Load saved state
+try {
+  const saved = localStorage.getItem('easyDescriptionsState');
+  if (saved) {
+    const parsed = JSON.parse(saved);
+    Object.keys(parsed).forEach(k => {
+      if (cardState[k]) cardState[k] = parsed[k];
+    });
+  }
+} catch(e) {}
+
+function saveState() {
+  try {
+    localStorage.setItem('easyDescriptionsState', JSON.stringify(cardState));
+  } catch(e) {}
+}
+
+function getLevelClass(level) {
+  return 'lvl-' + level.toLowerCase();
+}
+
+function renderFlashcards() {
+  const grid = document.getElementById('flashcardGrid');
+  const levelFilter = document.getElementById('levelFilter').value;
+  let filtered = FLASHCARDS;
+
+  if (currentTab !== 'all') {
+    filtered = filtered.filter(c => c.category === currentTab);
+  }
+  if (levelFilter !== 'all') {
+    filtered = filtered.filter(c => c.level === levelFilter);
+  }
+
+  document.getElementById('fcCount').textContent = filtered.length + ' cards';
+
+  if (filtered.length === 0) {
+    grid.innerHTML = '<p class="small" style="grid-column:1/-1;text-align:center;padding:30px;">No cards found with this filter.</p>';
+    return;
+  }
+
+  grid.innerHTML = '';
+  filtered.forEach(card => {
+    const state = cardState[card.id];
+    const el = document.createElement('div');
+    el.className = 'fc-card' + (state.step >= 3 ? ' completed' : '') + (state.open ? ' open' : '');
+    el.id = 'fc-' + card.id;
+    el.dataset.cardId = card.id;
+
+    // Progress dots
+    let dotsHtml = '<div class="fc-progress">';
+    for (let i = 0; i < 3; i++) {
+      const dotClass = i < state.step ? 'dot done' : (i === state.step ? 'dot active' : 'dot');
+      dotsHtml += '<div class="' + dotClass + '"></div>';
+    }
+    dotsHtml += '<span class="fc-count">' + state.step + '/3</span>';
+    dotsHtml += '</div>';
+
+    // Steps
+    let answerStep = '';
+    let explanationStep = '';
+    let examplesStep = '';
+
+    if (state.step >= 1) {
+      answerStep = '<div class="fc-step answer">' +
+        '<div class="step-label">✅ Answer</div>' +
+        '<div class="step-text">' + card.answer + '</div>' +
+        '<div class="audio-line">' +
+          '<button class="audio-btn" data-phrase="' + card.audio.replace(/"/g, '&quot;') + '" data-accent="us">🇺🇸 US</button>' +
+          '<button class="audio-btn" data-phrase="' + card.audio.replace(/"/g, '&quot;') + '" data-accent="uk">🇬🇧 UK</button>' +
+        '</div>' +
+      '</div>';
+    }
+    if (state.step >= 2) {
+      explanationStep = '<div class="fc-step explanation">' +
+        '<div class="step-label">💡 Easy Explanation</div>' +
+        '<div class="step-text">' + card.explanation + '</div>' +
+      '</div>';
+    }
+    if (state.step >= 3) {
+      let examplesHtml = card.examples.map(ex => '<div style="margin:6px 0;">✅ ' + ex + '</div>').join('');
+      examplesStep = '<div class="fc-step examples">' +
+        '<div class="step-label">📘 More Examples</div>' +
+        '<div class="step-text">' + examplesHtml + '</div>' +
+      '</div>';
+    }
+
+    el.innerHTML =
+      '<div class="fc-header" onclick="toggleCard(\'' + card.id + '\')">' +
+        '<span class="fc-icon">' + card.icon + '</span>' +
+        '<div class="fc-title-wrap">' +
+          '<div class="fc-topic">' + card.topic + '</div>' +
+          '<div class="fc-question">' + card.question + '</div>' +
+        '</div>' +
+        '<span class="fc-toggle">▼</span>' +
+      '</div>' +
+      '<span class="fc-level ' + getLevelClass(card.level) + '">' + card.level + '</span>' +
+      '<div class="fc-body">' +
+        answerStep +
+        explanationStep +
+        examplesStep +
+        '<div class="fc-actions">' +
+          (state.step < 3
+            ? '<button class="secondary" onclick="event.stopPropagation();advanceCard(\'' + card.id + '\')">' +
+                (state.step === 0 ? '▶ Show Answer' : state.step === 1 ? '▶ Show Explanation' : '▶ Show Examples') +
+              '</button>'
+            : '<button class="accent" onclick="event.stopPropagation();resetCard(\'' + card.id + '\')">🔄 Reset Card</button>') +
+          '<button class="light" onclick="event.stopPropagation();nextCard(\'' + card.id + '\')">⏭ Next</button>' +
+        '</div>' +
+      '</div>' +
+      dotsHtml;
+
+    grid.appendChild(el);
+  });
+
+  saveState();
+}
+
+function toggleCard(id) {
+  const state = cardState[id];
+  state.open = !state.open;
+  if (state.open && state.step === 0) {
+    state.step = 1; // auto-reveal answer on first open
+    markSectionDone('flashcards');
+  }
+  renderFlashcards();
+}
+
+function advanceCard(id) {
+  const state = cardState[id];
+  if (state.step < 3) {
+    state.step++;
+    state.open = true;
+    if (state.step >= 1) markSectionDone('flashcards');
+    renderFlashcards();
+  }
+}
+
+function resetCard(id) {
+  const state = cardState[id];
+  state.step = 0;
+  state.open = false;
+  renderFlashcards();
+}
+
+function nextCard(id) {
+  const levelFilter = document.getElementById('levelFilter').value;
+  let filtered = FLASHCARDS;
+  if (currentTab !== 'all') filtered = filtered.filter(c => c.category === currentTab);
+  if (levelFilter !== 'all') filtered = filtered.filter(c => c.level === levelFilter);
+
+  const idx = filtered.findIndex(c => c.id === id);
+  if (idx >= 0 && idx < filtered.length - 1) {
+    const nextId = filtered[idx + 1].id;
+    const nextEl = document.getElementById('fc-' + nextId);
+    if (nextEl) {
+      nextEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      setTimeout(() => {
+        if (!cardState[nextId].open) {
+          cardState[nextId].open = true;
+          if (cardState[nextId].step === 0) cardState[nextId].step = 1;
+          markSectionDone('flashcards');
+          renderFlashcards();
+        }
+      }, 300);
+    }
+  }
+}
+
+function resetAllCards() {
+  Object.keys(cardState).forEach(k => { cardState[k] = { step: 0, open: false }; });
+  renderFlashcards();
+}
+
+function switchTab(tab) {
+  currentTab = tab;
+  document.querySelectorAll('#tabBar button').forEach(b => {
+    b.classList.toggle('active', b.dataset.tab === tab);
+  });
+  renderFlashcards();
+  markSectionDone('flashcards');
+}
+
+/* ================================================================
+   PRACTICE DATA — SIMPLE ENGLISH
+   ================================================================ */
+const practiceData = {
+  beach: {
+    question: "Describe a beach.",
+    model: "<div class='en'>The sand is soft. The sea is blue. It is sunny. The beach is quiet and warm. I like to walk there.</div><div class='pt'>A areia é macia. O mar é azul. Está ensolarado. A praia é tranquila e quente. Eu gosto de caminhar lá.</div>",
+    audio: "The sand is soft. The sea is blue. It is sunny. The beach is quiet and warm. I like to walk there."
+  },
+  bedroom: {
+    question: "Describe your bedroom.",
+    model: "<div class='en'>My room is small but cozy. It has a bed and a desk. The bed is next to the window. I have a red chair. There is a lamp on the desk.</div><div class='pt'>Meu quarto é pequeno mas aconchegante. Tem uma cama e uma escrivaninha. A cama fica ao lado da janela. Tenho uma cadeira vermelha. Há um abajur na escrivaninha.</div>",
+    audio: "My room is small but cozy. It has a bed and a desk. The bed is next to the window. I have a red chair. There is a lamp on the desk."
+  },
+  person: {
+    question: "Describe a happy person.",
+    model: "<div class='en'>She is smiling. She is laughing a lot. She is happy because she got good news. She has a big smile on her face.</div><div class='pt'>Ela está sorrindo. Ela está rindo muito. Ela está feliz porque recebeu uma boa notícia. Ela tem um grande sorriso no rosto.</div>",
+    audio: "She is smiling. She is laughing a lot. She is happy because she got good news. She has a big smile on her face."
+  },
+  rainy: {
+    question: "Describe a rainy day.",
+    model: "<div class='en'>The sky is gray. It is raining. People use umbrellas. The streets are wet. I stay at home and drink tea. It is a quiet day.</div><div class='pt'>O céu está cinza. Está chovendo. As pessoas usam guarda-chuvas. As ruas estão molhadas. Eu fico em casa e bebo chá. É um dia tranquilo.</div>",
+    audio: "The sky is gray. It is raining. People use umbrellas. The streets are wet. I stay at home and drink tea. It is a quiet day."
+  },
+  school: {
+    question: "Describe a school.",
+    model: "<div class='en'>The school is big. It has many classrooms. There are many students in the hall. The library is quiet. The playground is noisy.</div><div class='pt'>A escola é grande. Tem muitas salas de aula. Há muitos alunos no corredor. A biblioteca é silenciosa. O pátio é barulhento.</div>",
+    audio: "The school is big. It has many classrooms. There are many students in the hall. The library is quiet. The playground is noisy."
+  },
+  friend: {
+    question: "Describe your best friend.",
+    model: "<div class='en'>My best friend is Julia. She is tall and has long brown hair. She is always happy and friendly. She helps me a lot. She likes to laugh.</div><div class='pt'>Minha melhor amiga é Julia. Ela é alta e tem cabelo longo e castanho. Ela está sempre feliz e simpática. Ela me ajuda muito. Ela gosta de rir.</div>",
+    audio: "My best friend is Julia. She is tall and has long brown hair. She is always happy and friendly. She helps me a lot. She likes to laugh."
+  },
+  food: {
+    question: "Describe your favorite food.",
+    model: "<div class='en'>I love pizza. It is hot and tasty. My pizza has cheese and tomato. It smells good. I eat pizza with my family on Fridays.</div><div class='pt'>Eu amo pizza. É quente e saborosa. Minha pizza tem queijo e tomate. Cheira bem. Eu como pizza com minha família às sextas-feiras.</div>",
+    audio: "I love pizza. It is hot and tasty. My pizza has cheese and tomato. It smells good. I eat pizza with my family on Fridays."
+  },
+  feel: {
+    question: "How do you feel today?",
+    model: "<div class='en'>I feel good today. I am happy and relaxed. I slept well. I am not tired. I feel ready for the day.</div><div class='pt'>Me sinto bem hoje. Estou feliz e relaxado. Dormi bem. Não estou cansado. Me sinto pronto para o dia.</div>",
+    audio: "I feel good today. I am happy and relaxed. I slept well. I am not tired. I feel ready for the day."
+  }
+};
+
+function showPractice() {
+  const topic = document.getElementById('practiceTopic').value;
+  const data = practiceData[topic];
+  const out = document.getElementById('practiceOutput');
+  out.style.display = 'block';
+  document.getElementById('practiceQuestion').textContent = data.question;
+  document.getElementById('practiceModel').innerHTML = data.model;
+  document.getElementById('practiceAudio').innerHTML =
+    '<button class="audio-btn" data-phrase="' + data.audio.replace(/"/g, '&quot;') + '" data-accent="us">🇺🇸 US</button>' +
+    '<button class="audio-btn" data-phrase="' + data.audio.replace(/"/g, '&quot;') + '" data-accent="uk">🇬🇧 UK</button>';
+  markSectionDone('practice');
+}
+
+/* ================================================================
+   SPEAKING SAVE
+   ================================================================ */
+function saveSpeaking(){
+  const box=document.getElementById('speakingNotes');
+  const fb=document.getElementById('speakFb');
+  if(box.value.trim().length<10){
+    setFeedback('speakFb',false,'Write a few sentences first, then practice speaking them aloud.');
+  }else{
+    setFeedback('speakFb',true,'Great! Now read your sentences aloud and try to speak without looking.');
+    localStorage.setItem('easyDescriptionsSpeaking',box.value);
+  }
+  markSectionDone('practice');
+}
+
+/* ================================================================
+   QUIZ — SIMPLE ENGLISH
+   ================================================================ */
+const baseQuestions=[
+ {q:'Describe a beach — Which answer is the best?',a:['The sand is soft. The sea is blue. It is sunny.','The beach is there.','Sand sea sun.','I like beach.'],c:0,e:'Use colors and simple adjectives.'},
+ {q:'Describe your bedroom — Which sentence is correct?',a:['My room is small. It has a bed and a desk.','My room have a bed.','My room is small it bed.','Bed desk room.'],c:0,e:'Use "is" and "has" to describe.'},
+ {q:'Describe a happy person — Which verbs can you use?',a:['Smile and laugh','Eat and sleep','Run and jump','Read and write'],c:0,e:'Use "smile" and "laugh" for a happy person.'},
+ {q:'Describe a rainy day — Which word is a weather word?',a:['Sky','Table','Chair','Book'],c:0,e:'Weather words: sky, rain, wet, cloudy.'},
+ {q:'Describe a school — Which sentence is correct?',a:['The school is big. It has many classrooms.','The school are big.','School big many classrooms.','The school have many classroom.'],c:0,e:'Use "is" for one thing and "has" for things inside.'},
+ {q:'Describe your best friend — Which sentence describes personality?',a:['She is tall.','She is happy and friendly.','She has brown hair.','She is a girl.'],c:1,e:'Personality adjectives: happy, friendly, kind, funny.'},
+ {q:'Describe your favorite food — Which word describes taste?',a:['Delicious','Table','Fork','Plate'],c:0,e:'Taste words: delicious, tasty, sweet, salty, hot.'},
+ {q:'How do you feel today? — Which sentence is correct?',a:['I feel happy and relaxed.','I feel table.','I feel book.','I feel chair.'],c:0,e:'Use feeling adjectives: happy, sad, tired, relaxed.'},
+ {q:'Write an informative text — What should you use?',a:['Facts and clear sentences','Only opinions','Long difficult words','No structure'],c:0,e:'Informative texts give facts clearly.'},
+ {q:'Write an argumentative text — What should you use?',a:['Your opinion and reasons','Only facts','Questions only','No opinion'],c:0,e:'Argumentative texts give an opinion with reasons.'}
+];
+
+let questions = [];
+let quizScore=0;
+let answered=0;
+
+function shuffle(arr){
+  const a=[...arr];
+  for(let i=a.length-1;i>0;i--){
+    const j=Math.floor(Math.random()*(i+1));
+    [a[i],a[j]]=[a[j],a[i]];
+  }
+  return a;
+}
+
+function buildQuestions(){
+  questions = shuffle(baseQuestions).map(q => {
+    const pairs = q.a.map((text, idx) => ({text, correct: idx === q.c}));
+    const shuffledPairs = shuffle(pairs);
+    const newOptions = shuffledPairs.map(p => p.text);
+    const newCorrect = shuffledPairs.findIndex(p => p.correct);
+    return { q: q.q, a: newOptions, c: newCorrect, e: q.e };
+  });
+}
+
+function renderQuiz(){
+  buildQuestions();
+  const c=document.getElementById('quizContainer');
+  c.innerHTML='';
+  questions.forEach((item,i)=>{
+    const box=document.createElement('div');
+    box.className='exercise';
+    box.innerHTML='<h3>Question '+(i+1)+'</h3><p><strong>'+item.q+'</strong></p>';
+    item.a.forEach((ans,j)=>{
+      const b=document.createElement('button');
+      b.className='option';
+      b.textContent=String.fromCharCode(65+j)+') '+ans;
+      b.onclick=()=>answerQuiz(i,j,box);
+      box.appendChild(b);
+    });
+    const f=document.createElement('div');
+    f.className='feedback';
+    f.id='qfb'+i;
+    box.appendChild(f);
+    c.appendChild(box);
+  });
+  updateScore();
+}
+
+function answerQuiz(i,j,box){
+  const buttons=box.querySelectorAll('.option');
+  if([...buttons].some(b=>b.disabled)) return;
+  buttons.forEach(b=>b.disabled=true);
+  const correct=j===questions[i].c;
+  buttons[j].classList.add(correct?'correct':'wrong');
+  if(!correct) buttons[questions[i].c].classList.add('correct');
+  if(correct) quizScore++;
+  answered++;
+  const fb=document.getElementById('qfb'+i);
+  fb.className='feedback '+(correct?'correct':'wrong');
+  fb.textContent=(correct?'🟢 Correct! ':'🔴 Not quite. ')+questions[i].e;
+  updateScore();
+  if(answered===10) markSectionDone('quiz');
+}
+
+function updateScore(){
+  document.getElementById('score').textContent=quizScore+' / 10';
+  const msg=document.getElementById('scoreMessage');
+  if(answered===0) msg.textContent='Complete the quiz to see your result.';
+  else if(answered<10) msg.textContent='Keep going! '+answered+' of 10 answered.';
+  else if(quizScore===10) msg.textContent='🏆 Excellent! Perfect score!';
+  else if(quizScore>=8) msg.textContent='👏 Great job! Review the questions you missed.';
+  else if(quizScore>=6) msg.textContent='👍 Good start! Review the lesson and try again.';
+  else msg.textContent='📚 Keep practicing. Review the lesson and restart the quiz.';
+}
+
+function restartQuiz(){
+  quizScore=0; answered=0; renderQuiz();
+  document.getElementById('quiz').scrollIntoView({behavior:'smooth'});
+}
+
+/* ================================================================
+   INIT
+   ================================================================ */
+renderFlashcards();
+renderQuiz();
+
+/* Intersection observer for sections */
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const id = entry.target.id;
+      if (['objetivos','flashcards','vocabulary','practice'].includes(id)) markSectionDone(id);
+    }
+  });
+}, { threshold: 0.35 });
+['objetivos','flashcards','vocabulary','practice'].forEach(id => {
+  const el = document.getElementById(id);
+  if (el) observer.observe(el);
+});
+
+/* Load saved data */
+const savedSpeaking = localStorage.getItem('easyDescriptionsSpeaking');
+if (savedSpeaking) document.getElementById('speakingNotes').value = savedSpeaking;
+
+updateProgress();
+</script>
+
+</body>
+</html>
+
